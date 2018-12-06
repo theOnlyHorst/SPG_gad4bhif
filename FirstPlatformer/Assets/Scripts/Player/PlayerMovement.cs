@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour {
 
     [SerializeField]
     private float movementForce,jumpForce;
+    
+    //this is used to set the exact amount of frames a player can't jump after jumping once
     [SerializeField]
     private int jumpCoolDownMax;
     [SerializeField]
@@ -21,7 +23,11 @@ public class PlayerMovement : MonoBehaviour {
 
     private float xMov, jmp;
 
+    //this is a cooldown added so the player can't spam the jump and make the charackter look dumb
     private int jmpCoolDown;
+
+    //this int is used to add a slight delay before trying to check if the player is not jumping anymore to prevent the animation from immediatly reverting again
+    private int jmpAnimFrameDelay;
 
     // Use this for initialization
     void Start () {
@@ -35,8 +41,10 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (jmpCoolDown > 0)
+        if (jmpCoolDown > 0 && IsGrounded())
             jmpCoolDown--;
+        if (jmpAnimFrameDelay > 0)
+            jmpAnimFrameDelay--;
         xMov = Input.GetAxis("Horizontal");
         animCont.SetFloat("walkspeed", Math.Abs(xMov));
         if (xMov < 0&& !spriteRenderer.flipX)
@@ -51,10 +59,16 @@ public class PlayerMovement : MonoBehaviour {
 
         if (jmp > 0 && IsGrounded()&&jmpCoolDown==0)
         {
-            rigid.velocity = new Vector2(0,jumpForce);
+            animCont.SetBool("jumping", true);
+            rigid.AddForce(new Vector2(0,jumpForce),ForceMode2D.Impulse);
             jmpCoolDown = jumpCoolDownMax;
+            jmpAnimFrameDelay = 5;
         }
-        
+        if(animCont.GetBool("jumping")&&IsGrounded()&&jmpAnimFrameDelay==0)
+        {
+            animCont.SetBool("jumping", false);
+        }
+        Debug.Log(animCont.GetBool("jumping"));
     }
     void FixedUpdate()
     {

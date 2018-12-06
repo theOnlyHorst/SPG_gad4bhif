@@ -117,11 +117,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 30
   m_AngularDrag: 0.05
-  m_GravityScale: 50
+  m_GravityScale: 100
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &58599869035282466
 CircleCollider2D:
@@ -135,9 +135,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07542217, y: -0.91043746}
+  m_Offset: {x: -0.00071406364, y: -0.89278436}
   serializedVersion: 2
-  m_Radius: 0.64917696
+  m_Radius: 0.67176473
 --- !u!61 &61729741239212302
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -150,7 +150,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5984745}
+  m_Offset: {x: 0, y: 0.4060038}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -161,7 +161,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.341986, y: 2.1969514}
+  m_Size: {x: 1.341986, y: 2.5818927}
   m_EdgeRadius: 0
 --- !u!95 &95290812795388094
 Animator:
@@ -192,9 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b473e7976249b9498f43869be136f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementForce: 700
-  jumpForce: 120
-  jumpCoolDownMax: 20
+  movementForce: 1250
+  jumpForce: 250
+  jumpCoolDownMax: 10
   groundMask:
     serializedVersion: 2
     m_Bits: 256
