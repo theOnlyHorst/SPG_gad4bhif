@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -19,7 +20,10 @@ public class PlayerMovement : MonoBehaviour {
     private GameObject groundPoint;
     private SpriteRenderer spriteRenderer;
     private GameObject mainCam;
+    private bool doubleJump;
     private GameObject respawn;
+    [SerializeField]
+    private UnityEvent onRespawn;
 
     private float xMov, jmp;
 
@@ -55,29 +59,41 @@ public class PlayerMovement : MonoBehaviour {
         {
             spriteRenderer.flipX = false;
         }
-        jmp = Input.GetAxis("Jump");
+        
 
-        if (jmp > 0 && IsGrounded()&&jmpCoolDown==0)
+        if (Input.GetButtonDown("Jump") && IsGrounded()&&jmpCoolDown==0)
         {
             animCont.SetBool("jumping", true);
             rigid.AddForce(new Vector2(0,jumpForce),ForceMode2D.Impulse);
             jmpCoolDown = jumpCoolDownMax;
             jmpAnimFrameDelay = 5;
+            
         }
-        if(animCont.GetBool("jumping")&&IsGrounded()&&jmpAnimFrameDelay==0)
+        if (Input.GetButtonDown("Jump") &&doubleJump && jmpCoolDown == 0)
+        {
+            float xV = rigid.velocity.x;
+            rigid.velocity = new Vector2(xV, 0);
+            rigid.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            jmpCoolDown = jumpCoolDownMax;
+        }
+        if (animCont.GetBool("jumping")&&IsGrounded()&&jmpAnimFrameDelay==0)
         {
             animCont.SetBool("jumping", false);
         }
-        Debug.Log(animCont.GetBool("jumping"));
     }
     void FixedUpdate()
     {
-        if(!IsGrounded())
+        if (!IsGrounded())
         {
-            rigid.AddForce(new Vector2(xMov * movementForce*0.5f, 0));
+
+            rigid.AddForce(new Vector2(xMov * movementForce * 0.5f, 0));
         }
         else
-        rigid.AddForce(new Vector2(xMov* movementForce, 0));
+        {
+            if (doubleJump)
+                doubleJump = false;
+            rigid.AddForce(new Vector2(xMov * movementForce, 0));
+        }
     }
 
     void LateUpdate()
@@ -95,11 +111,24 @@ public class PlayerMovement : MonoBehaviour {
         return false;
     }
 
+    public void EnableDoubleJump()
+    {
+        doubleJump = true;
+        jmpCoolDown = 0;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Killzone")
         {
             transform.position = respawn.transform.position;
+            onRespawn.Invoke();
         }
+    }
+
+    public void PlayerKnockback()
+    {
+        rigid.velocity = new Vector2(0, 0);
+        rigid.AddForce(new Vector2(spriteRenderer.flipX ? movementForce*7:movementForce*-7,0),ForceMode2D.Force);
     }
 }
