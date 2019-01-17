@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField]
     private LayerMask groundMask;
 
+
+
     private Rigidbody2D rigid;
     private Animator animCont;
     private GameObject groundPoint;
@@ -96,10 +98,6 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    void LateUpdate()
-    {
-        mainCam.transform.position = new Vector3(transform.position.x, 0,-10);
-    }
     public bool IsGrounded()
     {
         Collider2D coll = Physics2D.OverlapCircle(groundPoint.transform.position, 0.01f,groundMask);
