@@ -11,11 +11,14 @@ public class PlayerMovementV2 : MonoBehaviour
     
     public float gravity = -25f;
     public float runSpeed = 30f;
-    public float inAirDamping = 1f;
+    public float runSpeedInAirMultiplier = 1f;
     public float jumpTime = 10f;
     public float jumpStrength = 1f;
-    public float jumpBoardStrength = 1f;
+    public float jumpBoardBounce = 1f;
     public float jumpBoardHitDelay = 0.2f;
+    public float jumpBoardBoostMultiplier = 1.5f;
+    public float knockbackStrength = 3f;
+    public float runAnimSpeed = 1f;
     //----------------------------------
     private CharacterController2D _controller;
     private Animator _animator;
@@ -26,7 +29,10 @@ public class PlayerMovementV2 : MonoBehaviour
     private GameObject respawn;
     private bool jumping;
     private bool jumpBoard;
+    private bool jumpBoardBoost;
     private float jumpBoardHitDelayTimer;
+
+
     [SerializeField]
     private UnityEvent onRespawn;
 
@@ -64,7 +70,10 @@ public class PlayerMovementV2 : MonoBehaviour
        
         if (jumping)
         {
-            _velocity.y =  -gravity * Time.deltaTime * jumpStrength;
+            float tmpy = -gravity * Time.deltaTime * jumpStrength;
+            if (jumpBoardBoost)
+                tmpy *= jumpBoardBoostMultiplier;
+            _velocity.y = tmpy;
             //Debug.Log(1-jmpMov);
             jumpTimer += Time.deltaTime;
         }
@@ -73,7 +82,7 @@ public class PlayerMovementV2 : MonoBehaviour
         if (jumpTimer>=jumpTime||jmpMov==0)
         {
             jumping = false;
-            
+            jumpBoardBoost = false;
             jumpTimer = 0;
             //Debug.Log("jumpEnd");
         }
@@ -91,16 +100,17 @@ public class PlayerMovementV2 : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 jumping = true;
-                _velocity.y += -gravity * jumpBoardStrength*2;
-                _velocity.y += -gravity * Time.deltaTime * jumpStrength ;
+                _velocity.y += -gravity * jumpBoardBounce*2;
                 _animator.SetBool("jumping", true);
                 jumpBoard = false;
+                jumpBoardBoost = true;
             }
             else
             {
                 if (jumpBoardHitDelayTimer <= 0)
                 {
-                    _velocity.y += -gravity * jumpBoardStrength;
+                    _velocity.y += -gravity * jumpBoardBounce;
+                    _animator.SetBool("jumping", true);
                     jumpBoard = false;
                 }
             }
@@ -108,7 +118,7 @@ public class PlayerMovementV2 : MonoBehaviour
         
         
         var xMov = Input.GetAxis("Horizontal");
-        _animator.SetFloat("walkspeed", Math.Abs(xMov));
+        _animator.SetFloat("walkspeed", Math.Abs(xMov)*runAnimSpeed);
 
         if (xMov < 0 && !spriteRenderer.flipX)
         {
@@ -118,12 +128,16 @@ public class PlayerMovementV2 : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
+       
+
         if(_controller.isGrounded)
             _velocity.x = runSpeed * xMov;
         else
-            _velocity.x = runSpeed * xMov /inAirDamping;
+            _velocity.x = runSpeed * xMov * runSpeedInAirMultiplier;
+      
         _velocity.y += gravity * Time.deltaTime;
 
+        
 
 
         _controller.move(_velocity*Time.deltaTime);
@@ -135,7 +149,7 @@ public class PlayerMovementV2 : MonoBehaviour
 
     public void onJumpboardHit()
     {
-        Debug.Log("Trigger hit");
+        //Debug.Log("Trigger hit");
         jumpBoard = true;
         jumpBoardHitDelayTimer = jumpBoardHitDelay;
     }
@@ -151,4 +165,6 @@ public class PlayerMovementV2 : MonoBehaviour
             onRespawn.Invoke();
         }
     }
+
+    
 }

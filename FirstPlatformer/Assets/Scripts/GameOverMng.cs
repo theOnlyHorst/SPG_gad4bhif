@@ -17,7 +17,15 @@ public class GameOverMng : MonoBehaviour {
 
     public void Respawn()
     {
-        SceneManager.LoadScene("MainScene");
+        var mark = GameObject.FindGameObjectWithTag("LevelMark");
+        if(mark==null)
+        {
+            return;
+        }
+        var markScr = mark.GetComponent<LevelMark>();
+        var scene = markScr.GetSceneName();
+        GameObject.Destroy(mark);
+        SceneManager.LoadScene(scene);
     }
 
 }

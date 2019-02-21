@@ -158,6 +158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 5
   colorSwitchSecondsDelayMax: 0.025
+  iFramesHit: 3
+  iFramesFall: 1
   onHealthChanged:
     m_PersistentCalls:
       m_Calls:
@@ -247,10 +249,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: -30
-  runSpeed: 20
-  inAirDamping: 1.5
-  jumpTime: 0.25
-  jumpStrength: 25
+  runSpeed: 12
+  runSpeedInAirMultiplier: 0.6
+  jumpTime: 0.3
+  jumpStrength: 23
+  jumpBoardBounce: 0.3
+  jumpBoardHitDelay: 0.1
+  jumpBoardBoostMultiplier: 1.5
+  knockbackStrength: 10
+  runAnimSpeed: 1.1
   onRespawn:
     m_PersistentCalls:
       m_Calls:

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Prime31;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +13,12 @@ public class PlayerHealth : MonoBehaviour {
     [SerializeField]
     private float colorSwitchSecondsDelayMax;
 
+    [SerializeField]
+    private float iFramesHit;
+
+    [SerializeField]
+    private float iFramesFall;
+
     private float colorSwitchSecondsDelay;
 
     private int health;
@@ -20,16 +27,20 @@ public class PlayerHealth : MonoBehaviour {
 
     private SpriteRenderer sprRender;
 
+    private CharacterController2D contr;
+
     [SerializeField]
     private UnityEvent onHealthChanged;
 
-    private PlayerMovement mv;
+    private PlayerMovementV2 mv;
 
 	// Use this for initialization
 	void Start () {
         health = startHealth;
         sprRender = GetComponentInChildren<SpriteRenderer>();
-        mv = GetComponent<PlayerMovement>();
+        mv = GetComponent<PlayerMovementV2>();
+        contr = GetComponent<CharacterController2D>();
+        contr.onControllerCollidedEvent += on2DControllerColliderHit;
 	}
 	
 	// Update is called once per frame
@@ -65,23 +76,26 @@ public class PlayerHealth : MonoBehaviour {
         
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+
+    private void on2DControllerColliderHit(RaycastHit2D hit)
     {
-        if (collision.gameObject.CompareTag("Damaging")&&invincibility<=0)
+        if (hit.collider.gameObject.CompareTag("Damaging") && invincibility <= 0)
         {
-            invincibility = 3f;
-            mv.PlayerKnockback();
+            invincibility = iFramesHit;
+           // mv.PlayerKnockback();
             CheckGameOver();
             health--;
             onHealthChanged.Invoke();
         }
     }
 
+
     public void respawnDamage()
     {
         health--;
         CheckGameOver();
-        invincibility = 1f;
+        invincibility = iFramesFall;
         onHealthChanged.Invoke();
     }
 
