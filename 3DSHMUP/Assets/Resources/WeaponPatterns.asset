@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084664a785645f0408a4c1894e84493b, type: 3}
+  m_Name: WeaponPatterns
+  m_EditorClassIdentifier: 
+  gunPattern:
+    shootFrequency: 2
+    shotPrefab: {fileID: 2043328626811582795, guid: e95ae7782d809354d9d39f97d59b557b,
+      type: 3}
+  tripleGunPattern:
+    shootFrequency: 2
+    shotPrefab: {fileID: 3450431392912255304, guid: da2f2546dbdeb974a846f0bf194813e2,
+      type: 3}
+  shotgunPattern:
+    shootFrequency: 0
+    shotPrefab: {fileID: 0}
+  automaticPattern:
+    shootFrequency: 0
+    shotPrefab: {fileID: 0}
+  tripleAutomaticPattern:
+    shootFrequency: 0
+    shotPrefab: {fileID: 0}
