@@ -32,44 +32,32 @@ public class PlayerShooting : MonoBehaviour
     private void FixedUpdate() {
         if(shootSw)
         {
-            GameObject shotPattern = null;
-            float frequency = 0;
-            float despawnTimer = 0;
-            if(activeWeapon == WeaponType.TRIPLEGUN&&shootDownSw)
+            bool exists= weaponPatterns.patternDict.TryGetValue(activeWeapon,out PlayerWeaponPattern pattern);
+            if(!exists)
+                return;
+            if(cooldown<=0&&(pattern.automatic||shootDownSw))
             {
-                shotPattern = weaponPatterns.tripleGunPattern.ShotPrefab;
-                frequency = weaponPatterns.tripleGunPattern.ShootFrequency;
-                despawnTimer = weaponPatterns.tripleGunPattern.despawnTime;
-            }
-            //TODO other cases
-            else if(shootDownSw)
-            {
-                shotPattern = weaponPatterns.gunPattern.ShotPrefab;
-                frequency = weaponPatterns.gunPattern.ShootFrequency;
-                despawnTimer = weaponPatterns.gunPattern.despawnTime;
-            }
-
-            if(shotPattern!=null&&cooldown<=0)
-            {
-                foreach (Transform child in shotPattern.transform)
+                foreach (Transform child in pattern.ShotPrefab.transform)
                 {
-                    var copy = Instantiate(child,transform.position+new Vector3(0,0,3)+child.localPosition,child.rotation);
-                    copy.GetComponent<BulletNormalScript>().BulletDespawnTimer = despawnTimer;
+                    var copy = Instantiate(child,transform.position+child.localPosition,child.rotation);
+                    copy.GetComponent<BulletNormalScript>().BulletDespawnTimer = pattern.despawnTime;
                 }
-                cooldown = 1/frequency;
+                cooldown = 1/pattern.ShootFrequency;
             }
             shootSw = false;
+            shootDownSw = false;
         }
         cooldown -= Time.fixedDeltaTime;
     }
 
-    public enum WeaponType
-    {
-        GUN,
-        TRIPLEGUN,
-        SHOTGUN,
-        AUTOMATIC,
-        TRIPLEAUTOMATIC,
+    
+}
+public enum WeaponType
+{
+    GUN,
+    TRIPLEGUN,
+    SHOTGUN,
+    AUTOMATIC,
+    TRIPLEAUTOMATIC,
 
-    }
 }

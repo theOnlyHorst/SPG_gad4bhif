@@ -5,39 +5,40 @@ using System;
 
 [CreateAssetMenu(fileName = "WeaponPatterns", menuName = "3DSHMUP/WeaponPatterns", order = 0)]
 public class WeaponPatterns : ScriptableObject {
-    
-    [SerializeField]
-    public PlayerGunPattern gunPattern;
-
-    [SerializeField]
-    public PlayerTripleGunPattern tripleGunPattern;
 
     
+    //Maybe use this in future
     [SerializeField]
-    public PlayerShotGunPattern shotgunPattern;
+    private List<PlayerWeaponPattern> patterns;
     
-    [SerializeField]
-    public PlayerAutomaticPattern automaticPattern;
-    
-    [SerializeField]
-    public PlayerAutomaticTriplePattern tripleAutomaticPattern;
 
-    
+    public Dictionary<WeaponType,PlayerWeaponPattern> patternDict;
 
     private void OnEnable() {
+        patternDict = new Dictionary<WeaponType,PlayerWeaponPattern>();
+        foreach(var p in patterns)
+        {
+            patternDict.Add(p.WeaponType,p);
+        }
     }
 
     
 }
 [Serializable]
-public class PlayerGunPattern
+public class PlayerWeaponPattern
 {
+    [SerializeField]
+    private string name;
+
+    public WeaponType WeaponType;
     [SerializeField]
     private float shootFrequency;
     [SerializeField]
     private GameObject shotPrefab;
 
     public float despawnTime;
+
+    public bool automatic;
     public float ShootFrequency{
         get
         {
@@ -52,97 +53,5 @@ public class PlayerGunPattern
         }
     }
 }
-[Serializable]
-public class PlayerTripleGunPattern
-{
-    [SerializeField]
-    private float shootFrequency;
-    [SerializeField]
-    private GameObject shotPrefab;
 
-    public float despawnTime;
-    public float ShootFrequency{
-        get
-        {
-            return shootFrequency;
-        }
-    }
-
-    public GameObject ShotPrefab{
-        get
-        {
-            return shotPrefab;
-        }
-    }
-    
-}
-[Serializable]
-public class PlayerShotGunPattern
-{
-    [SerializeField]
-    private float shootFrequency;
-    [SerializeField]
-    private GameObject shotPrefab;
-
-    public float despawnTime;
-    public float ShootFrequency{
-        get
-        {
-            return shootFrequency;
-        }
-    }
-
-    public GameObject ShotPrefab{
-        get
-        {
-            return shotPrefab;
-        }
-    }
-}
-[Serializable]
-public class PlayerAutomaticPattern
-{
-    [SerializeField]
-    private float shootFrequency;
-    [SerializeField]
-    private GameObject shotPrefab;
-
-    public float despawnTime;
-    public float ShootFrequency{
-        get
-        {
-            return shootFrequency;
-        }
-    }
-
-    public GameObject ShotPrefab{
-        get
-        {
-            return shotPrefab;
-        }
-    }
-}
-[Serializable]
-public class PlayerAutomaticTriplePattern
-{
-    [SerializeField]
-    private float shootFrequency;
-    [SerializeField]
-    private GameObject shotPrefab;
-
-    public float despawnTime;
-    public float ShootFrequency{
-        get
-        {
-            return shootFrequency;
-        }
-    }
-
-    public GameObject ShotPrefab{
-        get
-        {
-            return shotPrefab;
-        }
-    }
-}
 

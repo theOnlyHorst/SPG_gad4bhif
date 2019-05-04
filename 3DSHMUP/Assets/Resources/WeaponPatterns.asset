@@ -12,25 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084664a785645f0408a4c1894e84493b, type: 3}
   m_Name: WeaponPatterns
   m_EditorClassIdentifier: 
-  gunPattern:
-    shootFrequency: 2
+  patterns:
+  - name: Gun
+    WeaponType: 0
+    shootFrequency: 8
     shotPrefab: {fileID: 5152488410055334132, guid: a0f32b6ffbdeeaa4790b6da66315474a,
       type: 3}
-    despawnTime: 5
-  tripleGunPattern:
-    shootFrequency: 2
+    despawnTime: 3
+    automatic: 0
+  - name: Triple Gun
+    WeaponType: 1
+    shootFrequency: 8
     shotPrefab: {fileID: 3450431392912255304, guid: da2f2546dbdeb974a846f0bf194813e2,
       type: 3}
-    despawnTime: 5
-  shotgunPattern:
-    shootFrequency: 0
-    shotPrefab: {fileID: 0}
-    despawnTime: 2
-  automaticPattern:
-    shootFrequency: 0
-    shotPrefab: {fileID: 0}
-    despawnTime: 0
-  tripleAutomaticPattern:
-    shootFrequency: 0
-    shotPrefab: {fileID: 0}
-    despawnTime: 0
+    despawnTime: 3
+    automatic: 0
+  - name: Shotgun
+    WeaponType: 2
+    shootFrequency: 2
+    shotPrefab: {fileID: 8652384889161916330, guid: bd91d4d3e3ecbb34eb597769fae16d8a,
+      type: 3}
+    despawnTime: 1
+    automatic: 0
+  - name: Automatic
+    WeaponType: 3
+    shootFrequency: 16
+    shotPrefab: {fileID: 5152488410055334132, guid: a0f32b6ffbdeeaa4790b6da66315474a,
+      type: 3}
+    despawnTime: 3
+    automatic: 1
+  - name: Triple Automatic
+    WeaponType: 4
+    shootFrequency: 16
+    shotPrefab: {fileID: 3450431392912255304, guid: da2f2546dbdeb974a846f0bf194813e2,
+      type: 3}
+    despawnTime: 3
+    automatic: 1
