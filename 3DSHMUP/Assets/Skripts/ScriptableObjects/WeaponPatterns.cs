@@ -37,6 +37,7 @@ public class PlayerGunPattern
     [SerializeField]
     private GameObject shotPrefab;
 
+    public float despawnTime;
     public float ShootFrequency{
         get
         {
@@ -58,6 +59,8 @@ public class PlayerTripleGunPattern
     private float shootFrequency;
     [SerializeField]
     private GameObject shotPrefab;
+
+    public float despawnTime;
     public float ShootFrequency{
         get
         {
@@ -80,6 +83,8 @@ public class PlayerShotGunPattern
     private float shootFrequency;
     [SerializeField]
     private GameObject shotPrefab;
+
+    public float despawnTime;
     public float ShootFrequency{
         get
         {
@@ -101,6 +106,8 @@ public class PlayerAutomaticPattern
     private float shootFrequency;
     [SerializeField]
     private GameObject shotPrefab;
+
+    public float despawnTime;
     public float ShootFrequency{
         get
         {
@@ -122,6 +129,8 @@ public class PlayerAutomaticTriplePattern
     private float shootFrequency;
     [SerializeField]
     private GameObject shotPrefab;
+
+    public float despawnTime;
     public float ShootFrequency{
         get
         {

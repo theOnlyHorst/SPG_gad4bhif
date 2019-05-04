@@ -14,18 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunPattern:
     shootFrequency: 2
-    shotPrefab: {fileID: 2043328626811582795, guid: e95ae7782d809354d9d39f97d59b557b,
+    shotPrefab: {fileID: 5152488410055334132, guid: a0f32b6ffbdeeaa4790b6da66315474a,
       type: 3}
+    despawnTime: 5
   tripleGunPattern:
     shootFrequency: 2
     shotPrefab: {fileID: 3450431392912255304, guid: da2f2546dbdeb974a846f0bf194813e2,
       type: 3}
+    despawnTime: 5
   shotgunPattern:
     shootFrequency: 0
     shotPrefab: {fileID: 0}
+    despawnTime: 2
   automaticPattern:
     shootFrequency: 0
     shotPrefab: {fileID: 0}
+    despawnTime: 0
   tripleAutomaticPattern:
     shootFrequency: 0
     shotPrefab: {fileID: 0}
+    despawnTime: 0

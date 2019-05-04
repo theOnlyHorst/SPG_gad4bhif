@@ -7,6 +7,10 @@ public class BulletNormalScript : MonoBehaviour
     [SerializeField]
     private BulletStats stats;
 
+    public float BulletDespawnTimer {
+        set;get;
+    }
+
     
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,12 @@ public class BulletNormalScript : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if(BulletDespawnTimer<=0)
+            Destroy(this.gameObject);
+        else
+        {
+            BulletDespawnTimer-= Time.fixedDeltaTime;
+        }
         Vector3 velocity = transform.up;
         velocity = velocity*stats.normalBulletSpeed*Time.fixedDeltaTime;
         transform.position += velocity;

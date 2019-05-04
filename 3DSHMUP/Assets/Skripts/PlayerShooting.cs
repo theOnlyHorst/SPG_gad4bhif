@@ -6,6 +6,9 @@ public class PlayerShooting : MonoBehaviour
 {
     private bool shootSw;
 
+    private bool shootDownSw;
+    
+    
     [SerializeField]
     private WeaponPatterns weaponPatterns;
 
@@ -23,28 +26,36 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         if(Input.GetButton("shoot")) shootSw = true;
+        if(Input.GetButtonDown("shoot")) shootDownSw = true;
     }
 
     private void FixedUpdate() {
         if(shootSw)
         {
-            GameObject shotPattern;
-            float frequency;
-            if(activeWeapon == WeaponType.TRIPLEGUN)
+            GameObject shotPattern = null;
+            float frequency = 0;
+            float despawnTimer = 0;
+            if(activeWeapon == WeaponType.TRIPLEGUN&&shootDownSw)
             {
                 shotPattern = weaponPatterns.tripleGunPattern.ShotPrefab;
                 frequency = weaponPatterns.tripleGunPattern.ShootFrequency;
+                despawnTimer = weaponPatterns.tripleGunPattern.despawnTime;
             }
             //TODO other cases
-            else
+            else if(shootDownSw)
             {
                 shotPattern = weaponPatterns.gunPattern.ShotPrefab;
                 frequency = weaponPatterns.gunPattern.ShootFrequency;
+                despawnTimer = weaponPatterns.gunPattern.despawnTime;
             }
 
-            if(cooldown<=0)
+            if(shotPattern!=null&&cooldown<=0)
             {
-                GameObject.Instantiate(shotPattern,transform.position+new Vector3(0,0,2),shotPattern.transform.rotation);
+                foreach (Transform child in shotPattern.transform)
+                {
+                    var copy = Instantiate(child,transform.position+new Vector3(0,0,3)+child.localPosition,child.rotation);
+                    copy.GetComponent<BulletNormalScript>().BulletDespawnTimer = despawnTimer;
+                }
                 cooldown = 1/frequency;
             }
             shootSw = false;
