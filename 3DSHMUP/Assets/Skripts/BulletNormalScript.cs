@@ -31,8 +31,8 @@ public class BulletNormalScript : MonoBehaviour
         {
             BulletDespawnTimer-= Time.fixedDeltaTime;
         }
-        Vector3 velocity = transform.up;
-        velocity = velocity*stats.normalBulletSpeed*Time.fixedDeltaTime;
+         
+        Vector3 velocity = transform.up*stats.normalBulletSpeed*Time.fixedDeltaTime;
         transform.position += velocity;
     }
 

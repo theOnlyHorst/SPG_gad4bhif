@@ -7,7 +7,6 @@ using System;
 public class WeaponPatterns : ScriptableObject {
 
     
-    //Maybe use this in future
     [SerializeField]
     private List<PlayerWeaponPattern> patterns;
     
