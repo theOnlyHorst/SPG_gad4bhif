@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3();
         movement.x = xMov*movementSpeed*Time.fixedDeltaTime;
         movement.z = zMov* movementSpeed*Time.fixedDeltaTime;
-        
+        if(GameManager.Instance.IsInBounds(transform.position+movement))
         _controller.Move(movement);
 
     }
