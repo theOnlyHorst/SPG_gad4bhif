@@ -18,10 +18,6 @@ MonoBehaviour:
   playerMaxHealth: 20
   spawns: {fileID: 11400000, guid: 03fd26b2ec007004e934813a7937475b, type: 2}
   healthBonus: 10
-  spawnpoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  dropObj: {fileID: 8241182063467122439, guid: 8a96bec27e1c92040829e963cd47a9f6, type: 3}
+  spawnpoints: []
   maxIFrames: 10

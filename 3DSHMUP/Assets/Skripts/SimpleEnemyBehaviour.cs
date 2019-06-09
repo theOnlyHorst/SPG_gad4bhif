@@ -98,9 +98,15 @@ public class SimpleEnemyBehaviour : MonoBehaviour
             currentHealth--;
             if(currentHealth==0)
             {
+                if(Random.value<=enemyStats.GetSimpleEnemyStats(difficulty).dropChance)
+                {
+                    var drop = GameObject.Instantiate(GameManager.Instance.dropObj,transform.position,transform.rotation);
+                    drop.GetComponent<WeaponUpgrade>().SetWeapon(enemyStats.GetSimpleEnemyStats(difficulty).droppedWeapon);
+                }
                 gmInstance.PlayerAddScore(enemyStats.GetSimpleEnemyStats(difficulty).score);
                 Destroy(this.gameObject);
                 gmInstance.EnemyDeath();
+                Debug.Log("enemy died");
             }
         }
     }

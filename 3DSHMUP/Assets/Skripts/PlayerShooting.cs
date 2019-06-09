@@ -50,6 +50,11 @@ public class PlayerShooting : MonoBehaviour
         cooldown -= Time.fixedDeltaTime;
     }
 
+    public void SwitchWeapon(WeaponType type)
+    {
+        activeWeapon = type;
+    }
+
     
 }
 public enum WeaponType

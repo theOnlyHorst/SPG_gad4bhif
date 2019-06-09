@@ -24,6 +24,8 @@ MonoBehaviour:
     shotFrequency: 0.5
     health: 2
     score: 1
+    droppedWeapon: 1
+    dropChance: 0.1
   - name: MediumSimpleEnemy
     diffculty: 1
     movementSpeed: 8
@@ -36,6 +38,8 @@ MonoBehaviour:
     shotFrequency: 1
     health: 2
     score: 2
+    droppedWeapon: 3
+    dropChance: 0.1
   - name: HardSimpleEnemy
     diffculty: 2
     movementSpeed: 8
@@ -48,3 +52,5 @@ MonoBehaviour:
     shotFrequency: 1.5
     health: 5
     score: 3
+    droppedWeapon: 4
+    dropChance: 0.05

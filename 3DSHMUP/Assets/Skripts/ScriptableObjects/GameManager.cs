@@ -31,7 +31,7 @@ public class GameManager : ScriptableObject
 
     private int currentHealth;
 
-    private int score;
+    private int score = 0;
 
     private Queue<SimpleEnemyDifficulty> enemySpawns;
 
@@ -40,6 +40,8 @@ public class GameManager : ScriptableObject
     private int activeWave;
 
     private bool won;
+
+    public GameObject dropObj;
 
 
     [HideInInspector]
@@ -82,6 +84,8 @@ public class GameManager : ScriptableObject
 
     public void InitLevel()
     {
+        score = 0;
+        won = false;
         currentHealth = playerMaxHealth;
         UIManager.Instance.displayHealth(currentHealth);
         LoadLevelSpawns();
@@ -108,7 +112,10 @@ public class GameManager : ScriptableObject
 
     public void PlayerAddScore(int score)
     {
+        Debug.Log(this.score);
         this.score+=score;
+        Debug.Log(score);
+        Debug.Log(this.score);
         UIManager.Instance.displayScore(this.score);
     }
 
@@ -136,6 +143,7 @@ public class GameManager : ScriptableObject
         {
             Debug.LogError("Wave sizes do not mach enemy spawns");
         }
+        activeWave = 0;
     }
 
     public void NextWave()

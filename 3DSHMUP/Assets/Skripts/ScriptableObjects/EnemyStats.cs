@@ -39,6 +39,10 @@ public class SimpleEnemyStats
     public int health;
 
     public int score;
+
+    public WeaponType droppedWeapon;
+
+    public float dropChance;
 }
 public enum SimpleEnemyDifficulty
 {
