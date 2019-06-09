@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletNormalScript : MonoBehaviour
+public class FastEnemyBulletScript : MonoBehaviour
 {
     [SerializeField]
     private BulletStats stats;
 
-    public float BulletDespawnTimer {
-        set;get;
-    }
-
+    public float bulletDespawnTimer;
     
     // Start is called before the first frame update
     void Start()
@@ -25,19 +22,19 @@ public class BulletNormalScript : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if(BulletDespawnTimer<=0)
+        if(bulletDespawnTimer<=0)
             Destroy(this.gameObject);
         else
         {
-            BulletDespawnTimer-= Time.fixedDeltaTime;
+            bulletDespawnTimer-= Time.fixedDeltaTime;
         }
          
-        Vector3 velocity = transform.up*stats.fastBulletSpeed*Time.fixedDeltaTime;
+        Vector3 velocity = transform.forward*stats.normalBulletSpeed*Time.fixedDeltaTime;
         transform.position += velocity;
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.tag == "DestroyZone"||other.gameObject.tag == "Enemy")
+        if(other.tag == "Player")
         {
             Destroy(this.gameObject);
         }

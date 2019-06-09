@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float xMov;
     private float zMov;
+
+    private int iFrames;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     {
         xMov = Input.GetAxisRaw("X-Movement");
         zMov = Input.GetAxisRaw("Z-Movement");
+
+        
         
     }
 
@@ -32,6 +36,20 @@ public class PlayerMovement : MonoBehaviour
         if(GameManager.Instance.IsInBounds(transform.position+movement))
         _controller.Move(movement);
 
+        if(iFrames>0)
+        {
+            iFrames--;
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.tag == "Damaging Player"&&iFrames==0)
+        {
+            iFrames = GameManager.Instance.maxIFrames;
+            GameManager.Instance.PlayerTakeDamage();
+            
+        }
     }
 
 }

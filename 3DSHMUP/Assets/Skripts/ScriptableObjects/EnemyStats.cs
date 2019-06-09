@@ -32,9 +32,13 @@ public class SimpleEnemyStats
     public SimpleEnemyDifficulty diffculty;
     public float movementSpeed;
     public float waitingTimeMovement;
-    public GameObject shotPattern;
+    public GameObject primaryShotPattern;
+    public GameObject secondaryShotPattern;
+    public float secondaryChance;
     public float shotFrequency;
     public int health;
+
+    public int score;
 }
 public enum SimpleEnemyDifficulty
 {

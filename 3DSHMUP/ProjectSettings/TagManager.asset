@@ -6,6 +6,10 @@ TagManager:
   tags:
   - DestroyZone
   - EnemyReferencePoint
+  - Damaging Player
+  - Damaging Enemy
+  - Enemy
+  - Spawnpoint
   layers:
   - Default
   - TransparentFX

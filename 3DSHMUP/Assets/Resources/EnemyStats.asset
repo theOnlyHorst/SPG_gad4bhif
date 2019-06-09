@@ -17,17 +17,34 @@ MonoBehaviour:
     diffculty: 0
     movementSpeed: 4
     waitingTimeMovement: 3
-    shotPattern: {fileID: 0}
-    health: 3
+    primaryShotPattern: {fileID: 5984031570008562337, guid: 0f972de139d5db7418b4c65399650717,
+      type: 3}
+    secondaryShotPattern: {fileID: 0}
+    secondaryChance: 0
+    shotFrequency: 0.5
+    health: 2
+    score: 1
   - name: MediumSimpleEnemy
     diffculty: 1
-    movementSpeed: 2
-    waitingTimeMovement: 0
-    shotPattern: {fileID: 0}
-    health: 5
+    movementSpeed: 8
+    waitingTimeMovement: 2
+    primaryShotPattern: {fileID: 5984031570008562337, guid: 0f972de139d5db7418b4c65399650717,
+      type: 3}
+    secondaryShotPattern: {fileID: 5123565894917042030, guid: 015c759827ee83b4e9e8905af5a509c2,
+      type: 3}
+    secondaryChance: 0.5
+    shotFrequency: 1
+    health: 2
+    score: 2
   - name: HardSimpleEnemy
     diffculty: 2
-    movementSpeed: 3
-    waitingTimeMovement: 0
-    shotPattern: {fileID: 0}
-    health: 7
+    movementSpeed: 8
+    waitingTimeMovement: 1
+    primaryShotPattern: {fileID: 7900767882200772447, guid: d8d778c360684ed4a8f153b355ab02ff,
+      type: 3}
+    secondaryShotPattern: {fileID: 2550258307520014221, guid: 03d29638567101b479b883c52641bf1d,
+      type: 3}
+    secondaryChance: 0.05
+    shotFrequency: 1.5
+    health: 5
+    score: 3

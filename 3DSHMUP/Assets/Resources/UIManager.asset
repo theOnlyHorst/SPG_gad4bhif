@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c42beb56069de7049956985de2164ae6, type: 3}
-  m_Name: BulletStats
+  m_Script: {fileID: 11500000, guid: 67a319d566efc654ca706946b1105212, type: 3}
+  m_Name: UIManager
   m_EditorClassIdentifier: 
-  slowBulletSpeed: 10
-  normalBulletSpeed: 20
-  fastBulletSpeed: 40

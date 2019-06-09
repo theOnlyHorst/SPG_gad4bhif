@@ -7,6 +7,8 @@ using System;
 public class BulletStats : ScriptableObject
 {
     [SerializeField]
+    public float slowBulletSpeed;
+    [SerializeField]
     public float normalBulletSpeed;
     [SerializeField]
     public float fastBulletSpeed;
